@@ -1,0 +1,17 @@
+version: '3'
+services:
+  hello1:
+    build:
+      context: .
+      dockerfile: ./hello1_dockerfile/Dockerfile
+    ports:
+     - "8001:8000"
+    restart: always
+
+  hello2:
+    build:
+      context: .
+      dockerfile: ./hello2_dockerfile/Dockerfile
+    ports:
+     - "8002:8000"
+    restart: always
