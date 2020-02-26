@@ -1,5 +1,11 @@
-# How to use
+# Using with Jenkins 
 
+
+Create jenkins pipeline job with source code: https://github.com/brightza008/example-nodejs.git
+
+
+
+# Source Code on github
 Create Dockerfile for hello-1.js
 ```
 FROM node:alpine3.10
@@ -57,15 +63,36 @@ Command to run docker-compose
 docker-compose up -d
 ```
 
+Jenkinsfile
+```
+pipeline {
+    agent any
+    environment { 
+        PATH = "$PATH:/usr/local/bin" //define docker-compose for jenkins user 
+    }
+    stages {
+        stage('clear existing dontainer') {
+        	steps {
+                sh'''
+                  docker-compose stop
+                '''
+            }
+        } //End stage
+        stage('deploy docker container') {
+        	steps {
+                sh'''
+                  docker-compose up -d
+                '''
+            }
+        } //End stage
+    }//End stages
+}//End pipeline
+```
+
 Create nginx Configuration
 ```
 default.conf
 ```
-
-# Using with Jenkins 
-
-
-create job jenkins pipeline with https://github.com/brightza008/example-nodejs.git
 
 
 
