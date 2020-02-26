@@ -3,11 +3,11 @@ pipeline {
 
     stages {
         
-        stage('clean up') {
+        /*stage('clean up') {
         	steps {
                 cleanWs()
             }
-        } //End stage
+        } */ //End stage
         
         stage('clear existing dontainer') {
         	steps {
