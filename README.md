@@ -91,7 +91,7 @@ pipeline {
 
 Create nginx Configuration
 ```
-default.conf
+รอเปิดเครื่อง server แปป ตังหมด
 ```
 
 
