@@ -13,8 +13,9 @@ pipeline {
         	steps {
                 sh'''
                   docker info
-                  docker-compose stop
                 '''
+                sh 'docker images'
+                sh 'docker-compose stop'
             }
         } //End stage
         
