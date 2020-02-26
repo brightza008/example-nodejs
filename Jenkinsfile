@@ -14,7 +14,6 @@ pipeline {
         stage('clear existing dontainer') {
         	steps {
                 sh'''
-                  docker info
                   docker-compose stop
                 '''
 
