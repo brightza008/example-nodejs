@@ -2,10 +2,25 @@ pipeline {
     agent any
 
     stages {
-        stage('echo') {
+        
+        stage('clean up') {
+        	steps {
+                cleanWs()
+            }
+        } //End stage
+        
+        stage('clear existing dontainer') {
         	steps {
                 sh'''
-                  ls -lrt
+                  docker compose stop
+                '''
+            }
+        } //End stage
+        
+        stage('deploy docker container') {
+        	steps {
+                sh'''
+                  docker compose up -d
                 '''
             }
         } //End stage
