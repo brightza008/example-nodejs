@@ -1,25 +1,16 @@
 pipeline {
     agent any
     environment { 
-        PATH = "$PATH:/usr/local/bin" //define docker-compose command
+        PATH = "$PATH:/usr/local/bin" //define docker-compose for jenkins user 
     }
     stages {
-        
-        /*stage('clean up') {
-        	steps {
-                cleanWs()
-            }
-        } */ //End stage
-        
         stage('clear existing dontainer') {
         	steps {
                 sh'''
                   docker-compose stop
                 '''
-
             }
         } //End stage
-        
         stage('deploy docker container') {
         	steps {
                 sh'''
