@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    environment { 
+        PATH = "$PATH:/usr/local/bin" //define docker-compose command
+    }
     stages {
         
         /*stage('clean up') {
@@ -13,9 +15,9 @@ pipeline {
         	steps {
                 sh'''
                   docker info
+                  docker-compose stop
                 '''
-                sh 'docker images'
-                sh 'docker-compose stop'
+
             }
         } //End stage
         
