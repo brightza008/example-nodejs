@@ -12,9 +12,7 @@ pipeline {
         stage('clear existing dontainer') {
         	steps {
                 sh'''
-                  pwd
-                  hostname 
-                  ifconfig
+                  docker info
                   docker-compose stop
                 '''
             }
