@@ -1,3 +1,18 @@
+# Requirement
++ Change status SELINUX to permissive or disabled for nginx
+```
+$ setenforce 0
+```
++ Allow firewall port 80
+```bash
+$ firewall-cmd --zone=public --add-port=80/tcp --permanent
+```
++ Allow jenkins user for run docker command 
+```bash
+$ usermod -aG dokerroot jenkind
+$ chmod 777 /var/run/docker.sock
+```
+
 # Using with Jenkins 
 
 
@@ -91,7 +106,7 @@ pipeline {
 
 Create nginx Configuration
 ```
-รอเปิดเครื่อง server แปป ตังหมด
+default.conf
 ```
 
 
