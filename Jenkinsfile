@@ -7,6 +7,7 @@ pipeline {
                 sh'''
                   ls -lrt
                 '''
-                )
             }
-        }
+        } //End stage
+    }//End stages
+}//End pipeline
