@@ -12,7 +12,7 @@ pipeline {
         stage('clear existing dontainer') {
         	steps {
                 sh'''
-                  docker compose stop
+                  docker-compose stop
                 '''
             }
         } //End stage
@@ -20,7 +20,7 @@ pipeline {
         stage('deploy docker container') {
         	steps {
                 sh'''
-                  docker compose up -d
+                  docker-compose up -d
                 '''
             }
         } //End stage
