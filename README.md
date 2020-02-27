@@ -51,7 +51,7 @@ RUN npm install redis
 CMD node /app/hello-2.js
 ```
 
-Create docker-compose.ym;
+Create docker-compose.yml
 ```
 version: '3'
 services:
@@ -103,7 +103,7 @@ pipeline {
 }//End pipeline
 ```
 
-Create nginx Configuration in `/etc/nginx/conf.d/default.conf`
+Edit nginx Configuration in `/etc/nginx/conf.d/default.conf` and reload config
 ```
 server {
     listen       80;
