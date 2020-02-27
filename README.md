@@ -6,6 +6,7 @@ $ firewall-cmd --zone=public --add-port=80/tcp --permanent
 + Allow jenkins user for run docker command 
 ```bash
 $ usermod -aG root jenkins
+$ chmod 777 /var/run/docker.sock
 ```
 
 # Using with Jenkins 
