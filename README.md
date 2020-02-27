@@ -9,8 +9,7 @@ $ firewall-cmd --zone=public --add-port=80/tcp --permanent
 ```
 + Allow jenkins user for run docker command 
 ```bash
-$ usermod -aG dokerroot jenkind
-$ chmod 777 /var/run/docker.sock
+$ usermod -aG root jenkins
 ```
 
 # Using with Jenkins 
@@ -104,13 +103,31 @@ pipeline {
 }//End pipeline
 ```
 
-Create nginx Configuration
+Create nginx Configuration in `/etc/nginx/conf.d/default.conf`
 ```
-default.conf
+server {
+    listen       80;
+    server_name  localhost;
+    #charset koi8-r;
+    #access_log  /var/log/nginx/host.access.log  main;
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+    
+   location /hello1 {
+            proxy_pass         http://0.0.0.0:8001;
+        }
+
+   location /hello2 {
+            proxy_pass         http://0.0.0.0:8002;
+        }
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
 ```
-
-
-
 
 # example-nodejs
 Just simple nodejs application
