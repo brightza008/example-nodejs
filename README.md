@@ -1,13 +1,62 @@
 # Requirement
+
++ docker & docker compose
+```
+$ yum install -y yum-utils device-mapper-persistent-data lvm2
+$ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+$ yum install -y docker-ce
+
+$chmod 777 /var/run/docker.sock
+```
++ docker compose
+```
+$ curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+$ chmod +x /usr/local/bin/docker-compose
+```
++ jenkins 
+```
+$ yum install java-1.8.0-openjdk-devel
+$ curl --silent --location http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo | sudo tee /etc/yum.repos.d/jenkins.repo
+$ rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+$ yum install jenkins
+
+$ usermod -aG root jenkins
+```
+
++ nginx
+```
+$ yum install nginx
+```
+edit nginx Configuration in `/etc/nginx/conf.d/default.conf` and reload config
+```
+server {
+    listen       80;
+    server_name  localhost;
+    #charset koi8-r;
+    #access_log  /var/log/nginx/host.access.log  main;
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+    
+   location /hello1 {
+            proxy_pass         http://0.0.0.0:8001;
+        }
+
+   location /hello2 {
+            proxy_pass         http://0.0.0.0:8002;
+        }
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
+```
 + Allow firewall port 80
 ```bash
-$ firewall-cmd --zone=public --add-port=80/tcp --permanent
+$ firewall-cmd --zone=public --add-port=80/tcp --add-port=8080/tcp --permanent
 ```
-+ Allow jenkins user for run docker command 
-```bash
-$ usermod -aG root jenkins
-$ chmod 777 /var/run/docker.sock
-```
+
 
 # Using with Jenkins 
 
@@ -100,31 +149,6 @@ pipeline {
 }//End pipeline
 ```
 
-Edit nginx Configuration in `/etc/nginx/conf.d/default.conf` and reload config
-```
-server {
-    listen       80;
-    server_name  localhost;
-    #charset koi8-r;
-    #access_log  /var/log/nginx/host.access.log  main;
-    location / {
-        root   /usr/share/nginx/html;
-        index  index.html index.htm;
-    }
-    
-   location /hello1 {
-            proxy_pass         http://0.0.0.0:8001;
-        }
-
-   location /hello2 {
-            proxy_pass         http://0.0.0.0:8002;
-        }
-    error_page   500 502 503 504  /50x.html;
-    location = /50x.html {
-        root   /usr/share/nginx/html;
-    }
-}
-```
 
 # example-nodejs
 Just simple nodejs application
