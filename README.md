@@ -1,8 +1,4 @@
 # Requirement
-+ Change status SELINUX to permissive or disabled for nginx
-```
-$ setenforce 0
-```
 + Allow firewall port 80
 ```bash
 $ firewall-cmd --zone=public --add-port=80/tcp --permanent
